@@ -72,25 +72,40 @@ header {
             text-align: left;
             color: #ffffff;
         }
-        .smartphone {
-            position: relative;
-            img {
-                display: block;
-            }
-            &__item {
-                position: absolute;
-                bottom:  -205px;
-                right: -5px;
-            }
-        }
+        // .smartphone {
+        //     position: relative;
+        //     img {
+        //         display: block;
+        //     }
+        //     &__item {
+        //         position: absolute;
+        //         bottom:  -195px;
+        //         right: -5px;
+                
+        //     }
+        // }
     }
     .carousel {
         position: absolute;
         top: 0;
         width: 100%;
+        max-height: 700px;
         margin: 0 auto;
         z-index: -2;
-        
+        .smartphone {
+                // position: relative;
+                img {
+                    display: block;
+                }
+                &__item {
+                    position: absolute;
+                    // bottom:  -195px;
+                    // right: -5px;
+                    bottom:  0;
+                    right: 370px;
+                    
+                }
+            }
         &__bg {
             // position: absolute;
             top: 0px;
