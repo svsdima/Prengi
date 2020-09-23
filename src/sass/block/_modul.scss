@@ -19,6 +19,12 @@
         min-height: 255px;
         border: solid 1px #ececec;
         background: url('../img/modul/frame.png') center (center / cover) no-repeat;
+        &_d {
+            width: 360px;
+            min-height: 255px;
+            border: solid 1px #ececec;
+            background: url('../img/modul/frame_2.png') center (center / cover) no-repeat;
+        }
     }
     &__descr {
         max-width: 264px;
