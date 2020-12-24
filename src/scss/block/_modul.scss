@@ -1,0 +1,80 @@
+.modul {
+    // display: flex;
+    // justify-content: space-between;
+    // align-items: center;
+    &__up {
+        margin-top: 79px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        img {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            max-height: 184px;
+        }
+    }
+    &__frame {
+        width: 360px;
+        min-height: 255px;
+        border: solid 1px #ececec;
+        background: url('../img/modul/frame.png') center (center / cover) no-repeat;
+        &_d {
+            width: 360px;
+            min-height: 255px;
+            border: solid 1px #ececec;
+            background: url('../img/modul/frame_2.png') center (center / cover) no-repeat;
+        }
+    }
+    &__descr {
+        max-width: 264px;
+        margin: 0 auto;
+        font-size: 18px;
+        font-weight: 300;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.44;
+        letter-spacing: normal;
+        text-align: center;
+        color: $main_color;
+        &_d {
+            font-size: 18px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: center;
+        }
+    }
+    &__line {
+        margin-top: 50px;
+        img {
+            display: block;
+            margin: 0 auto;
+        }
+    }
+    &__title {
+        margin-top: 33px;
+        font-size: 48px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 0.63;
+        letter-spacing: normal;
+        text-align: center;
+        color: $main_color;
+    }
+    &__down {
+        margin-top: 37px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        img {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            max-height: 184px;
+        }
+    }
+}

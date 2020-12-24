@@ -1,0 +1,61 @@
+
+.country {
+    // padding-top: 20px;
+    color: red;
+    &__round {
+        margin-top: 6px;
+        margin-right: 11px;
+        width: 28px;
+        height: 21px;
+        img {
+            display: block;
+        }
+    }
+    &__descr {
+        margin-right: 33px;
+        max-width: 189px;
+    }
+    &__name {
+        font-size: 14px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.5;
+        letter-spacing: normal;
+        text-align: left;
+        color: $second_color;
+    }
+    &__phone {
+        font-size: 11px;
+        font-weight: 300;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.5;
+        letter-spacing: normal;
+        text-align: left;
+        color: $second_color;
+        &__number {
+            color: $second_color;
+            text-decoration: none;
+            &:hover {
+                color: $second_color;
+                text-decoration: underline;
+            }
+        }
+    }
+    &__email {
+        font-size: 11px;
+        font-weight: 300;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.5;
+        letter-spacing: normal;
+        text-align: left;
+        color: $second_color;
+        text-decoration: none;
+            &:hover {
+                color: $second_color;
+                text-decoration: underline;
+            }
+    }
+}

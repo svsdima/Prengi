@@ -1,0 +1,101 @@
+.deployment {
+    margin-top: 80px;
+    min-height: 580px;
+    width: 100%;
+    background: url('../img/deployment/4.jpg') center (center / cover) no-repeat;
+    &__wrapper {
+        width: 100%; 
+    }
+    
+    &__title {
+        margin-top: 79px;
+        font-size: 30px;
+        font-weight: 900;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.2;
+        letter-spacing: normal;
+        text-align: center;
+        color: white;
+    }
+    &__shell {
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &__repository {
+
+        &__squaresecond {
+            width: 167px;
+            height: 167px;
+            background-color: rgba($color: #869d9f, $alpha: 0.3);
+            position: absolute;
+            top: 40%;
+            transform: translateY(-40%);
+            left: 43%;
+            transform: translateX(-43%);
+        }
+        &__text {
+            margin-top: 128px;
+            margin-right: 82px;
+            font-size: 30px;
+            font-weight: 900;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 0.73;
+            letter-spacing: normal;
+            text-align: right;
+            color: #ffffff;
+        }
+        &__subtext {
+            margin-top: 20px;
+            margin-right: 82px;
+            font-size: 18px;
+            font-weight: 300;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: right;
+            color: #ffffff;
+        }
+    }
+    &__server {
+        &__squaresecond {
+            width: 167px;
+            height: 167px;
+            background-color: rgba($color: #869d9f, $alpha: 0.3);
+            position: absolute;
+            top: 40%;
+            transform: translateY(-40%);
+            right: 37%;
+            transform: translateX(-25%);
+        }
+        &__text {
+            margin-top: 128px;
+            margin-left: 82px;
+            font-size: 30px;
+            font-weight: 900;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 0.73;
+            letter-spacing: normal;
+            text-align: left;
+            color: #ffffff;
+        }
+        &__subtext {
+            margin-top: 20px;
+            margin-left: 82px;
+            font-size: 18px;
+            font-weight: 300;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.44;
+            letter-spacing: normal;
+            text-align: left;
+            color: #ffffff;
+        }
+    }
+    
+}

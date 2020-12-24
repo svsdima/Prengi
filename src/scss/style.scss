@@ -1,0 +1,19 @@
+* {
+    font-family: 'Roboto';
+}
+.container {
+    max-width: 1150px;
+    margin: 0 auto;
+}
+
+@import './base/variables';
+@import './base/buttons';
+@import './base/modals';
+@import './block/header';
+@import './block/menu';
+@import './block/modul';
+@import './block/industries';
+@import './block/advantages';
+@import './block/deployment';
+@import './block/start';
+@import './block/footer';

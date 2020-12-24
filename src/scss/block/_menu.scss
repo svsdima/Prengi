@@ -1,0 +1,79 @@
+.main {
+    background: url('../img/bg/main_bg_4.jpg') center (center / cover) no-repeat ;
+    margin-top: 19px;
+    .logo {
+        display: block;
+        margin-top: 39px;
+    }
+    .menu {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        list-style-type: none;
+        margin-top: 64px;
+        &__link {
+            font-size: 13px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            letter-spacing: normal;
+            text-align: center;
+            color: #ffffff;
+            text-transform: uppercase;
+            text-decoration: none;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+    .promo {
+        margin-top: 27px;
+        &__header {
+            margin-top: 106px;
+            font-size: 42px;
+            font-weight: 900;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.14;
+            letter-spacing: normal;
+            text-align: left;
+            color: #ffffff;
+        }
+        &__subheader {
+            margin-top: 27px;
+            font-size: 24px;
+            font-weight: 300;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.25;
+            letter-spacing: normal;
+            text-align: left;
+            color: #ffffff;
+        }
+
+        // .smartphone {
+        //     position: relative;
+        //     img {
+        //         display: block;
+        //     }
+        //     &__item {
+        //         position: absolute;
+        //         bottom:  -195px;
+        //         right: -5px;
+                
+        //     }
+        // }
+        &__both {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        &__right {
+            max-width: 434px;
+            max-height: 569px;
+        }
+    }
+    .smartphone {
+        margin-top: 56px;
+    }
+}
