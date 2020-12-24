@@ -1,35 +1,138 @@
-/* Используем пакеты */
-const gulp        = require('gulp');
-const browserSync = require('browser-sync'); /* Автоматические обновляет сохранения в браузере */
-const sass        = require('gulp-sass'); /* Компилятор sass кода */
-const cleanCSS = require('gulp-clean-css'); /* Оптимизирует css файлы */
-const autoprefixer = require('gulp-autoprefixer'); /* Подключает автопрефиксы */
-const rename = require("gulp-rename"); /* Переименовывает файлы */
+const gulp = require("gulp");
+const webpack = require("webpack-stream");
+const sass = require("gulp-sass");
+const autoprefixer = require("autoprefixer");
+const cleanCSS = require("gulp-clean-css");
+const postcss = require("gulp-postcss");
+const browsersync = require("browser-sync");
+const jsonServer = require("gulp-json-srv");
 
-/* Создаём задачи, server - название задачи, function - создаём функцию */
-gulp.task('server', function() {
+const dist = "./dist";
 
-    browserSync({ /* Запускаем live-сервер из папки src */
-        server: {
-            baseDir: "src"
-        }
+const server = jsonServer.create();
+
+gulp.task("copy-html", () => {
+    return gulp.src("./src/index.html")
+                .pipe(gulp.dest(dist))
+                .pipe(browsersync.stream());
+});
+
+gulp.task("build-js", () => {
+    return gulp.src("./src/js/main.js")
+                .pipe(webpack({
+                    mode: 'development',
+                    output: {
+                        filename: 'script.js'
+                    },
+                    watch: false,
+                    devtool: "source-map",
+                    module: {
+                        rules: [
+                          {
+                            test: /\.m?js$/,
+                            exclude: /(node_modules|bower_components)/,
+                            use: {
+                              loader: 'babel-loader',
+                              options: {
+                                presets: [['@babel/preset-env', {
+                                    debug: true,
+                                    corejs: 3,
+                                    useBuiltIns: "usage"
+                                }]]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                }))
+                .pipe(gulp.dest(dist + '/js'))
+                .pipe(browsersync.stream());
+});
+
+gulp.task("build-sass", () => {
+    return gulp.src("./src/scss/style.scss")
+                .pipe(sass().on('error', sass.logError))
+                .pipe(gulp.dest(dist + '/css'))
+                .pipe(browsersync.stream());
+});
+
+gulp.task("copy-assets", () => {
+    // gulp.src("./db.json") 
+    //     .pipe(gulp.dest(dist))
+    //     .pipe(server.pipe());
+    gulp.src("./src/icons/**/*.*")
+        .pipe(gulp.dest(dist + "/icons"));
+    return gulp.src("./src/img/**/*.*")
+                .pipe(gulp.dest(dist + "/img"))
+                .pipe(browsersync.stream());
+    
+    
+    
+});
+
+
+
+gulp.task("watch", () => {
+    browsersync.init({
+		server: "./dist/",
+		port: 4000,
+		notify: true
     });
 
-    gulp.watch("src/*.html").on('change', browserSync.reload); /* Следит за change изменениями во всех файлах .html */
-});
-/* return - куда возвращается задача, после выполнения, gulp.scr -путь, pipe - выполнение действия */
-gulp.task('styles', function() {
-    return gulp.src("src/sass/**/*.+(scss|sass)") /* *.+(scss|sass) - все файлы с расширением scss или sass */
-        .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError)) /* Компилирует sass код, но он ещё никуда не отправлен, outputStyle - какой стиль компиляции будет - это compressed - сжатый стиль кода, sass.logError показывает ошибки, если они возникают */
-        .pipe(rename({suffix: '.min', prefix: ''})) /* При компиляции добавляется суффикс .min */
-        .pipe(autoprefixer()) /* Запускаем автопрефиксы */
-        .pipe(cleanCSS({compatibility: 'ie8'})) /* Запускает оптимизацию css файлов */
-        .pipe(gulp.dest("src/css")) /* Отправляет скомпилированный код в конкретный адрес */
-        .pipe(browserSync.stream()); /* После пересохранения файлов, заново запускаем browserSync, т.е. обновляется страница в браузере */
+    gulp.watch("./src/index.html", gulp.parallel("copy-html"));
+    gulp.watch("./src/icons/**/*.*", gulp.parallel("copy-assets"));
+    gulp.watch("./src/img/**/*.*", gulp.parallel("copy-assets"));
+    gulp.watch("./src/scss/**/*.scss", gulp.parallel("build-sass"));
+    gulp.watch("./src/js/**/*.js", gulp.parallel("build-js"));
+    // gulp.watch("./db.json", gulp.parallel("copy-assets"));
 });
 
-gulp.task('watch', function() {
-    gulp.watch("src/sass/**/*.+(scss|sass)", gulp.parallel('styles')); /* gulp.watch следит за обновлениями файлов, конкретно scss или sass файлами, и если есть обновления gulp.parallel параллельно запускает задачу styles */
-})
-/* default - задача, которая выполняется по умолчанию */
-gulp.task('default', gulp.parallel('watch', 'server', 'styles')); /* gulp.parralel - внутри задачи запускает параллельно команды watch, server, styles */
+gulp.task("build", gulp.parallel("copy-html", "copy-assets", "build-sass", "build-js"));
+
+gulp.task("prod", () => {
+    gulp.src("./src/index.html")
+        .pipe(gulp.dest(dist));
+    gulp.src("./src/img/**/*.*")
+        .pipe(gulp.dest(dist + "/img"));
+    gulp.src("./src/icons/**/*.*")
+        .pipe(gulp.dest(dist + "/icons"));
+        // gulp.src("./db.json")
+        // .pipe(gulp.dest(dist));
+
+    gulp.src("./src/js/main.js")
+        .pipe(webpack({
+            mode: 'production',
+            output: {
+                filename: 'script.js'
+            },
+            module: {
+                rules: [
+                  {
+                    test: /\.m?js$/,
+                    exclude: /(node_modules|bower_components)/,
+                    use: {
+                      loader: 'babel-loader',
+                      options: {
+                        presets: [['@babel/preset-env', {
+                            debug: false,
+                            corejs: 3,
+                            useBuiltIns: "usage"
+                        }]]
+                      }
+                    }
+                  }
+                ]
+              }
+        }))
+        .pipe(gulp.dest(dist + '/js'));
+    
+    return gulp.src("./src/scss/style.scss")
+        .pipe(sass().on('error', sass.logError))
+        .pipe(postcss([autoprefixer()]))
+        .pipe(cleanCSS())
+        .pipe(gulp.dest(dist + '/css'));
+});
+
+
+
+gulp.task("default", gulp.parallel("watch", "build"));
